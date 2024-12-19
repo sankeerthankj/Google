@@ -1,3 +1,4 @@
+import { FormEvent, useRef } from "react";
 import {
   MicrophoneIcon,
   SearchIcon,
@@ -5,8 +6,22 @@ import {
 } from "@heroicons/react/solid";
 import Avatar from "../Components/Avatar";
 import { Footer } from "../Components/Footer";
+import { useNavigate } from "react-router-dom";
+import { useResultContext } from "../Context/ResultContextProvider";
+
 
 export const Home = () => {
+  const searchInputRef = useRef<HTMLInputElement>(null);
+  const navigate = useNavigate();
+  const { setSearchTerm } = useResultContext();
+
+  const search = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const term = searchInputRef!.current!.value;
+
+    setSearchTerm(term);
+    navigate("/search")
+  };
   return (
     <div className="flex flex-col items-center justify-center h-screen">
       <header className="flex w-full p-5 justify-between text-sm text-gray-950">
@@ -24,7 +39,7 @@ export const Home = () => {
         </div>
       </header>
 
-      <form className="flex flex-col items-center mt-44 flex-grow w-4/5">
+      <form className="flex flex-col items-center mt-44 flex-grow w-4/5" onSubmit={search}>
         <img
           src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"
           width={300}
