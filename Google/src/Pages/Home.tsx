@@ -11,7 +11,7 @@ import { useResultContext } from "../Context/ResultContextProvider";
 
 
 export const Home = () => {
-  const searchInputRef = useRef<HTMLInputElement>(null);
+  const searchInputRef = useRef<HTMLInputElement>(null) //git copy this and paste the code and error in chatGPT
   const navigate = useNavigate();
   const { setSearchTerm } = useResultContext();
 
