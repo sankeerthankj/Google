@@ -21,5 +21,6 @@ export const Results = () => {
 
   console.log(results);
   
+  
   return <div>Results</div>;
 };

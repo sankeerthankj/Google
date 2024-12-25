@@ -9,18 +9,16 @@ import { Footer } from "../Components/Footer";
 import { useNavigate } from "react-router-dom";
 import { useResultContext } from "../Context/ResultContextProvider";
 
-
 export const Home = () => {
-  const searchInputRef = useRef<HTMLInputElement>(null) 
+  const searchInputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
-  const { setSearchTerm } = useResultContext();  
+  const { setSearchTerm } = useResultContext();
   const search = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const term = searchInputRef.current?.value!;  
-
+    const term = searchInputRef.current?.value!; // -- searchInputRef!.current!.value
 
     setSearchTerm(term);
-    navigate("/search")
+    navigate("/search");
   };
   return (
     <div className="flex flex-col items-center justify-center h-screen">
@@ -39,7 +37,10 @@ export const Home = () => {
         </div>
       </header>
 
-      <form className="flex flex-col items-center mt-44 flex-grow w-4/5" onSubmit={search}>
+      <form
+        onSubmit={search}
+        className="flex flex-col items-center mt-44 flex-grow w-4/5"
+      >
         <img
           src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"
           width={300}
@@ -47,7 +48,11 @@ export const Home = () => {
         />
         <div className="flex w-full mt-5 hover:shadow-lg focus-within:shadow-lg max-w-md rounded-full border border-gray-200 px-5 py-3 items-center sm:max-w-xl lg:max-w-2xl">
           <SearchIcon className="h-5 mr-3 text-gray-500" />
-          <input type="text" className="focus:outline-none flex-grow" />
+          <input
+            ref={searchInputRef}
+            type="text"
+            className="focus:outline-none flex-grow"
+          />
           <MicrophoneIcon className="h-5" />
         </div>
         <div className="flex flex-col w-1/2 space-y-2 justify-center mt-8 sm:space-y-0 sm:flex-row sm:space-x-4">
